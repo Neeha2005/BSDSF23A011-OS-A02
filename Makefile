@@ -1,54 +1,65 @@
 # ==========================
 #  Makefile for Custom LS
-#  Versions: v1.1.0 & v1.2.0
+#  Versions: v1.1.0, v1.2.0, v1.3.0
 # ==========================
 
-# Compiler
 CC = gcc
-
-# Flags
 CFLAGS = -Wall -g
-
-# Directories
 SRC_DIR = src
 BIN_DIR = bin
 
-# Ensure bin directory exists
+# Ensure bin exists
 $(BIN_DIR):
 	@mkdir -p $(BIN_DIR)
 
-# ======== Build Targets ========
-
+# Build v1.1.0 (Long listing)
 v1.1.0: $(BIN_DIR)
-	@echo "🔨 Building version 1.1.0 (Long Listing)..."
+	@echo "🔨 Building version v1.1.0 (Long Listing)..."
 	$(CC) $(CFLAGS) $(SRC_DIR)/lsv1.1.0.c -o $(BIN_DIR)/lsv1.1.0
-	@echo "✅ Build complete: bin/lsv1.1.0"
+	@echo "✅ Build complete: $(BIN_DIR)/lsv1.1.0"
 
+# Build v1.2.0 (Column display)
 v1.2.0: $(BIN_DIR)
-	@echo "🔨 Building version 1.2.0 (Column Display)..."
+	@echo "🔨 Building version v1.2.0 (Column Display)..."
 	$(CC) $(CFLAGS) $(SRC_DIR)/lsv1.2.0.c -o $(BIN_DIR)/lsv1.2.0
-	@echo "✅ Build complete: bin/lsv1.2.0"
+	@echo "✅ Build complete: $(BIN_DIR)/lsv1.2.0"
 
-# ======== Run Targets ========
+# Build v1.3.0 (Horizontal display / -x)
+v1.3.0: $(BIN_DIR)
+	@echo "🔨 Building version v1.3.0 (Horizontal Display / -x)..."
+	$(CC) $(CFLAGS) $(SRC_DIR)/lsv1.3.0.c -o $(BIN_DIR)/lsv1.3.0
+	@echo "✅ Build complete: $(BIN_DIR)/lsv1.3.0"
+
+# Run targets
+run-v1.1.0: v1.1.0
+	@echo "🚀 Running v1.1.0 (Long Listing)..."
+	./$(BIN_DIR)/lsv1.1.0 .
 
 run-v1.2.0: v1.2.0
-	@echo "🚀 Running ls version 1.2.0..."
+	@echo "🚀 Running v1.2.0 (Column Display)..."
 	./$(BIN_DIR)/lsv1.2.0 .
 
-# ======== Clean ========
+run-v1.3.0: v1.3.0
+	@echo "🚀 Running v1.3.0 (Horizontal Display / -x)..."
+	./$(BIN_DIR)/lsv1.3.0 .
 
+# Build all
+build-all: v1.1.0 v1.2.0 v1.3.0
+	@echo "🎯 All versions built"
+
+# Clean
 clean:
-	@echo "🧹 Cleaning build files..."
-	rm -f $(BIN_DIR)/lsv1.1.0 $(BIN_DIR)/lsv1.2.0
+	@echo "🧹 Cleaning binaries..."
+	rm -f $(BIN_DIR)/lsv1.1.0 $(BIN_DIR)/lsv1.2.0 $(BIN_DIR)/lsv1.3.0
 	@echo "✅ Clean complete."
-
-# ======== Help ========
 
 help:
 	@echo ""
-	@echo "Commands:"
-	@echo "  make v1.1.0     → Build Long Listing version"
-	@echo "  make v1.2.0     → Build Column Display version"
-	@echo "  make run-v1.2.0 → Run Column Display version"
-	@echo "  make clean      → Clean binaries"
+	@echo "Makefile commands:"
+	@echo "  make v1.1.0     -> Build v1.1.0 (long listing)"
+	@echo "  make v1.2.0     -> Build v1.2.0 (column display)"
+	@echo "  make v1.3.0     -> Build v1.3.0 (horizontal display -x)"
+	@echo "  make run-v1.3.0 -> Build+run v1.3.0"
+	@echo "  make build-all  -> Build all versions"
+	@echo "  make clean      -> Remove binaries"
 	@echo ""

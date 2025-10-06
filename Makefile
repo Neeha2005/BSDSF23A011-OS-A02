@@ -1,32 +1,35 @@
 # ---------------------------------------
 # Makefile for ls-v1.0.0 project
-# Author: <ZAneeha Afzal/Bsdsf23a011>
-# Description:
-#   Simple Makefile to compile and run the ls-v1.0.0 program.
+#   Compiles the starter ls-v1.0.0 program into the bin directory.
 # ---------------------------------------
 
 # Compiler
 CC = gcc
 
 # Compiler flags
-# -Wall : show all warnings
-# -g    : include debugging info
 CFLAGS = -Wall -g
 
-# Target executable name
-TARGET = my_ls
+# Directories
+SRC_DIR = src
+BIN_DIR = bin
 
-# Source file
-SRC = src/lsv1.0.0.c
+# Target name and paths
+TARGET = $(BIN_DIR)/my_ls
+SRC = $(SRC_DIR)/lsv1.0.0.c
 
-# Build the program
+# Default build rule
 $(TARGET): $(SRC)
+	@mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
+	@echo "✅ Build successful! Executable created: $(TARGET)"
 
 # Run the program
 run: $(TARGET)
+	@echo "🚀 Running program..."
 	./$(TARGET)
 
 # Clean build files
 clean:
-	rm -f $(TARGET)
+	rm -f $(BIN_DIR)/*
+	@echo "🧹 Cleaned build files."
+

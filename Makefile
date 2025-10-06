@@ -1,6 +1,6 @@
 # ==========================
 #  Makefile for Custom LS
-#  Versions: v1.1.0, v1.2.0, v1.3.0, v1.4.0
+#  Versions: v1.1.0, v1.2.0, v1.3.0, v1.4.0, v1.5.0
 # ==========================
 
 CC = gcc
@@ -36,6 +36,12 @@ v1.4.0: $(BIN_DIR)
 	$(CC) $(CFLAGS) $(SRC_DIR)/lsv1.4.0.c -o $(BIN_DIR)/lsv1.4.0
 	@echo "✅ Build complete: $(BIN_DIR)/lsv1.4.0"
 
+# Build v1.5.0 (Colorized Output)
+v1.5.0: $(BIN_DIR)
+	@echo "🔨 Building version v1.5.0 (Colorized Output)..."
+	$(CC) $(CFLAGS) $(SRC_DIR)/lsv1.5.0.c -o $(BIN_DIR)/lsv1.5.0
+	@echo "✅ Build complete: $(BIN_DIR)/lsv1.5.0"
+
 # Run targets
 run-v1.1.0: v1.1.0
 	@echo "🚀 Running v1.1.0 (Long Listing)..."
@@ -53,14 +59,19 @@ run-v1.4.0: v1.4.0
 	@echo "🚀 Running v1.4.0 (Alphabetical Sort)..."
 	./$(BIN_DIR)/lsv1.4.0 .
 
+run-v1.5.0: v1.5.0
+	@echo "🚀 Running v1.5.0 (Colorized Output)..."
+	./$(BIN_DIR)/lsv1.5.0 .
+
 # Build all
-build-all: v1.1.0 v1.2.0 v1.3.0 v1.4.0
+build-all: v1.1.0 v1.2.0 v1.3.0 v1.4.0 v1.5.0
 	@echo "🎯 All versions built"
 
 # Clean
 clean:
 	@echo "🧹 Cleaning binaries..."
-	rm -f $(BIN_DIR)/lsv1.1.0 $(BIN_DIR)/lsv1.2.0 $(BIN_DIR)/lsv1.3.0 $(BIN_DIR)/lsv1.4.0
+	rm -f $(BIN_DIR)/lsv1.1.0 $(BIN_DIR)/lsv1.2.0 $(BIN_DIR)/lsv1.3.0 \
+          $(BIN_DIR)/lsv1.4.0 $(BIN_DIR)/lsv1.5.0
 	@echo "✅ Clean complete."
 
 # Help
@@ -71,7 +82,8 @@ help:
 	@echo "  make v1.2.0     -> Build v1.2.0 (column display)"
 	@echo "  make v1.3.0     -> Build v1.3.0 (horizontal display -x)"
 	@echo "  make v1.4.0     -> Build v1.4.0 (alphabetical sort)"
-	@echo "  make run-v1.4.0 -> Build+run v1.4.0"
+	@echo "  make v1.5.0     -> Build v1.5.0 (colorized output)"
+	@echo "  make run-v1.5.0 -> Build+run v1.5.0"
 	@echo "  make build-all  -> Build all versions"
 	@echo "  make clean      -> Remove binaries"
 	@echo ""
